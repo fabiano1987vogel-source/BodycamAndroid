@@ -1,0 +1,20 @@
+
+name: Ativar licença Unity Personal
+
+on:
+  workflow_dispatch:
+
+jobs:
+  activation:
+    name: Solicitar arquivo de ativação
+    runs-on: ubuntu-latest
+    steps:
+      - name: Solicitar ativação
+        id: getLicense
+        uses: game-ci/unity-request-activation-file@v2
+
+      - name: Disponibilizar arquivo
+        uses: actions/upload-artifact@v4
+        with:
+          name: arquivo-ativacao-unity
+          path: ${{ steps.getLicense.outputs.filePath }}
